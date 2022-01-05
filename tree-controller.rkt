@@ -1,6 +1,5 @@
 #lang racket/base
-(require ffi/unsafe/objc
-         "utils.rkt")
+(require ffi/unsafe/objc)
 
 (import-class NSSplitViewController
               NSSplitView
