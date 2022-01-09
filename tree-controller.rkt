@@ -1,11 +1,13 @@
 #lang racket/base
 (require ffi/unsafe
          ffi/unsafe/objc
-         ffi/unsafe/nsstring
+         "types.rkt"
          "utils.rkt")
 
 (import-class NSObject
               NSString
+              NSWindow
+              NSApplication
               NSRect
               NSView
               NSSplitViewController
@@ -31,12 +33,22 @@
      (super-tell dealloc)))
 
 (define p (tell (tell Photo alloc) init))
-(define pho (tell (tell NSString alloc)
-                  initWithUTF8String: #:type _string "photo"))
-(tell p setPhotographer: pho)
+(tell p setPhotographer: (->NSString "photo"))
+(tell p setCaption: (->NSString "caption"))
+(tell p photographer)
 (NSLog "hkle")
-(tell p dealloc)
 
-(define mainView (tell (tell NSSplitView alloc) init))
-(define mainViewC (tell NSSplitViewController alloc))
-mainView
+(define frame (make-NSRect (make-NSPoint 0 0) (make-NSSize 200 200)))
+(define mainView (tell (tell NSSplitView alloc)
+                       initWithFrame: #:type _NSRect frame))
+
+(define app (tell NSApplication sharedApplication))
+(define win (tell (tell NSWindow alloc)
+                  initWithContentRect: #:type _NSRect frame
+                  styleMask: #:type _int 0
+                  backing: #:type _int 2
+                  defer: NO))
+(tell win setTitle: #:type _NSString "editor")
+(tell win setContentView: #:type _id mainView)
+(tell win makeKeyAndOrderFront: #f)
+(tell app run)

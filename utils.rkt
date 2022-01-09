@@ -6,6 +6,7 @@
          define-appserv
          define-appkit
          define-cg
+         ->NSString
          ; version
          version-10.6-or-later?
          version-10.7-or-later?
@@ -20,6 +21,7 @@
          version-12.0-or-later?)
 
 (require ffi/unsafe
+         ffi/unsafe/objc
          ffi/unsafe/define
          ffi/unsafe/nsalloc)
 
@@ -34,6 +36,11 @@
 (define-ffi-definer define-appserv appserv-lib)
 (define-ffi-definer define-appkit appkit-lib)
 (define-ffi-definer define-cg cg-lib)
+
+(import-class NSString)
+(define (->NSString s)
+  (tell (tell NSString alloc)
+        initWithUTF8String: #:type _string s))
 
 (define-appkit NSAppKitVersionNumber _double)
 (define (version-10.6-or-later?) ; Snow Leopard
