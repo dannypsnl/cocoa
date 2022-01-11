@@ -1,8 +1,8 @@
 #lang racket/base
 (require ffi/unsafe
          ffi/unsafe/objc
-         "types.rkt"
-         "utils.rkt")
+         "../types.rkt"
+         "../utils.rkt")
 
 (import-class NSObject
               NSString
@@ -15,7 +15,6 @@
               NSSplitViewItem
               NSOutlineView
               NSTreeController)
-
 
 (define-cocoa NSLog (_fun _NSString -> _void))
 
