@@ -15,7 +15,6 @@
 #define X(t) (sin(t) + 1) * width * 0.5  // macro for X(t)
 #define Y(t) (cos(t) + 1) * height * 0.5 // macro for Y(t)
 - (void)drawRect:(NSRect)rect {
-  double f, g;
   double const pi = 2 * acos(0.0);
 
   int n = 12; // number of sides of the polygon
@@ -32,8 +31,8 @@
 
   [[NSColor blackColor] set]; // set the drawing color to black
 
-  for (f = 0; f < 2 * pi; f += 2 * pi / n) { // draw the fancy pattern
-    for (g = 0; g < 2 * pi; g += 2 * pi / n) {
+  for (double f = 0; f < 2 * pi; f += 2 * pi / n) { // draw the fancy pattern
+    for (double g = 0; g < 2 * pi; g += 2 * pi / n) {
       NSPoint p1 = NSMakePoint(X(f), Y(f));
       NSPoint p2 = NSMakePoint(X(g), Y(g));
       [NSBezierPath strokeLineFromPoint:p1 toPoint:p2];
