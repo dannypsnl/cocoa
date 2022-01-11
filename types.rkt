@@ -1,8 +1,4 @@
 #lang racket/base
-(require ffi/unsafe/objc
-         ffi/unsafe
-         ffi/unsafe/nsstring)
-
 (provide _NSInteger _NSUInteger _OSStatus
          _CGFloat
          _NSPoint _NSPoint-pointer (struct-out NSPoint)
@@ -12,6 +8,10 @@
          NSObject
          NSNotFound
          _NSString)
+
+(require ffi/unsafe/objc
+         ffi/unsafe
+         ffi/unsafe/nsstring)
 
 (define _NSInteger _long)
 (define _NSUInteger _ulong)
@@ -30,7 +30,7 @@
 (define-cstruct _NSSize ([width _CGFloat]
                          [height _CGFloat]))
 
-(define-cstruct _NSRect ([origin _NSPoint][size _NSSize]))
+(define-cstruct _NSRect ([origin _NSPoint] [size _NSSize]))
 
 (define-cstruct _NSRange ([location _NSUInteger]
                           [length _NSUInteger]))
