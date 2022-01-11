@@ -1,30 +1,36 @@
 #lang racket/base
 (require ffi/unsafe
          ffi/unsafe/objc
-         "types.rkt"
-         "utils.rkt")
+         "main.rkt")
 
 (import-class NSWindow
               NSApplication
               NSRect
               NSView
-              NSOutlineView
-              NSTreeController
-              )
+              NSOutlineView)
+
+(define app #f)
+
+(define-cpointer-type _NSNotification)
+
+(define-objc-class MyOutlineView NSOutlineView
+  ()
+  (- _void (windowWillClose: [_NSNotification notification])
+     (tell app terminate: #:type _id self)))
 
 (call-with-autorelease
  (lambda ()
    (define frame (make-NSRect (make-NSPoint 0 0) (make-NSSize 200 200)))
-   (define mainView (tell (tell NSOutlineView alloc)
+   (define mainView (tell (tell MyOutlineView alloc)
                           initWithFrame: #:type _NSRect frame))
 
-   (define app (tell NSApplication sharedApplication))
+   (set! app (tell NSApplication sharedApplication))
    (define win (tell (tell NSWindow alloc)
                      initWithContentRect: #:type _NSRect frame
-                     styleMask: #:type _int 1
-                     backing: #:type _int 2
+                     styleMask: #:type _int NSWindowStyleMaskTitled
+                     backing: #:type _int NSBackingStoreBuffered
                      defer: NO))
-   (tell win setTitle: #:type _NSString "editor")
+   (tell win setTitle: #:type _NSString "outlineview")
    (tell win setContentView: #:type _id mainView)
    (tell win makeKeyAndOrderFront: #f)
    (tell app run)))

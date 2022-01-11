@@ -11,27 +11,20 @@
 - (void)drawRect:(NSRect)rect;
 @end
 
-@implementation DemoView                 // implementation of DemoView class
-#define X(t) (sin(t) + 1) * width * 0.5  // macro for X(t)
-#define Y(t) (cos(t) + 1) * height * 0.5 // macro for Y(t)
+@implementation DemoView
+#define X(t) (sin(t) + 1) * width * 0.5
+#define Y(t) (cos(t) + 1) * height * 0.5
 - (void)drawRect:(NSRect)rect {
   double const pi = 2 * acos(0.0);
-
-  int n = 12; // number of sides of the polygon
-
-  // get the size of the application's window and view objects
+  int n = 12;
   float width = [self bounds].size.width;
   float height = [self bounds].size.height;
 
-  [[NSColor whiteColor] set]; // set the drawing color to white
-  NSRectFill([self bounds]);  // fill the view with white
+  [[NSColor whiteColor] set];
+  NSRectFill([self bounds]);
 
-  // the following statements trace two polygons with n sides
-  // and connect all of the vertices with lines
-
-  [[NSColor blackColor] set]; // set the drawing color to black
-
-  for (double f = 0; f < 2 * pi; f += 2 * pi / n) { // draw the fancy pattern
+  [[NSColor blackColor] set];
+  for (double f = 0; f < 2 * pi; f += 2 * pi / n) {
     for (double g = 0; g < 2 * pi; g += 2 * pi / n) {
       NSPoint p1 = NSMakePoint(X(f), Y(f));
       NSPoint p2 = NSMakePoint(X(g), Y(g));
