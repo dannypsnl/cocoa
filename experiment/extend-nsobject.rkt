@@ -1,8 +1,7 @@
 #lang racket/base
 (require ffi/unsafe
          ffi/unsafe/objc
-         "../types.rkt"
-         "../utils.rkt")
+         "../main.rkt")
 
 (import-class NSObject
               NSString
