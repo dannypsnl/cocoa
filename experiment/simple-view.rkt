@@ -11,6 +11,7 @@
               NSRect
               NSView)
 
+((get-ffi-obj 'signal #f (_fun _int _intptr -> _void)) 2 0)
 (define app #f)
 
 (define-cpointer-type _NSNotification)
