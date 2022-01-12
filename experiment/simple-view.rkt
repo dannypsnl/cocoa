@@ -31,13 +31,15 @@
 
      (define (x t) (* (add1 (sin t)) width 0.5))
      (define (y t) (* (add1 (cos t)) height 0.5))
-     (for ([f (in-range (* 2 pi)
+     (for ([f (in-range 0 (* 2 pi)
                         (/ (* 2 pi) n))])
-       (for ([g (in-range (* 2 pi)
+       (for ([g (in-range 0 (* 2 pi)
                           (/ (* 2 pi) n))])
          (define p1 (make-NSPoint (x f) (y f)))
          (define p2 (make-NSPoint (x g) (y g)))
-         (tell NSBezierPath strokeLineFromPoint: p1 toPoint: p2))))
+         (tell NSBezierPath
+               strokeLineFromPoint: #:type _NSPoint p1
+               toPoint: #:type _NSPoint p2))))
   (- _void (windowWillClose: [_NSNotification notification])
      (tell app terminate: #:type _id self)))
 
