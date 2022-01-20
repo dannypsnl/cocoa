@@ -40,7 +40,7 @@ int main(int argc, const char *argv[]) {
                                     styleMask:NSWindowStyleMaskTitled
                                       backing:NSBackingStoreBuffered
                                         defer:NO];
-    [myWindow setTitle:@"editor"];
+    [myWindow setTitle:@"draw"];
     NSView *myView = [[DemoView alloc] initWithFrame:frame];
     [myWindow setContentView:myView];
     [myWindow makeKeyAndOrderFront:nil];
