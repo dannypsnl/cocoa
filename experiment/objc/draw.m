@@ -1,9 +1,3 @@
-//
-//  main.m
-//  editor
-//
-//  Created by 林子篆 on 2022/1/9.
-//
 #import <Cocoa/Cocoa.h>
 
 @interface DemoView : NSView {
