@@ -7,3 +7,5 @@
 (define version "0.0")
 (define pkg-authors '(linzizhuan))
 (define license '(Apache-2.0 OR MIT))
+(define compile-omit-paths '("experiment"))
+(define test-omit-paths compile-omit-paths)
