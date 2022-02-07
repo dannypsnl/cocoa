@@ -69,15 +69,13 @@
 - (NSView *)outlineView:(NSOutlineView *)outlineView
      viewForTableColumn:(NSTableColumn *)tableColumn
                    item:(id)item {
-  NSTableCellView *tableCellView;
+  NSTextField *tf = [[NSTextField alloc] init];
   if ([item isKindOfClass:[NSString class]]) {
     NSString *path = (NSString *)item;
-    NSLog(@"draw item: %@", path);
-    tableCellView = [outlineView makeViewWithIdentifier:path owner:self];
-    tableCellView.textField.stringValue = path;
-    tableCellView.textField.editable = NO;
+    [tf setStringValue:path];
+    NSLog(@"to draw: %@", tf);
   }
-  return tableCellView;
+  return tf;
 }
 @end
 
