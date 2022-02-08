@@ -4,18 +4,19 @@
     : NSViewController <NSOutlineViewDelegate, NSOutlineViewDataSource> {
   NSMutableArray *data;
   NSString *currentPath;
+  NSFileManager *fileManager;
 }
 @end
 
 @implementation MyViewController
 - (void)initWithDir:(NSString *)path view:(NSOutlineView *)view {
   self->data = [[NSMutableArray alloc] init];
-  NSFileManager *fm = [NSFileManager defaultManager];
-  NSArray *files = [fm contentsOfDirectoryAtPath:path error:nil];
+  fileManager = [NSFileManager defaultManager];
+  NSArray *files = [fileManager contentsOfDirectoryAtPath:path error:nil];
   for (NSString *file in files) {
     [self->data addObject:file];
   }
-  self->currentPath = [fm displayNameAtPath:path];
+  self->currentPath = [fileManager displayNameAtPath:path];
   NSLog(@"current path: %@", self->currentPath);
   NSLog(@"internal data: %@", self->data);
   view.delegate = self;
@@ -41,7 +42,7 @@
 - (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item {
   if ([item isKindOfClass:[NSString class]]) {
     NSLog(@"expandable item: %@", item);
-    return true;
+    return false;
   }
   if ([item isKindOfClass:[NSMutableArray class]]) {
     NSLog(@"expandable item: %@", item);
